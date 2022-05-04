@@ -1,0 +1,17 @@
+.jumbotron {
+    text-align: center;
+    background-color: blue;
+    color: white;
+
+}
+.city {
+    height: 250px;
+    padding: 5px;
+    margin: 15px;
+}
+
+.days {
+    margin: auto;
+    padding-bottom: 45px;
+    border: solid 2px;
+}
