@@ -1,36 +1,50 @@
-var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=37.4516&lon=-77.6592&units=imperial&exclude=hourly,daily,minutely&appid=51a61d96cb3c110846e5130afe5ac605";
+import fetch from 'node-fetch';
 
-var current = document.querySelector(".city");
-
-let date = new Date();
-const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-let day = date.getDate();
-let month = date.getMonth()  + 1;
-let year = date.getFullYear();
-const searchBtn = document.getElementById("searchBtn");
-const cityInput = document.getElementById('cityInput');
+var cityInput = document.getElementsByClassName('cityInput');
+var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=2ff41d70607b09fa349823714cb91710`;
+var todayApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=37.4516&lon=-77.6592&units=imperial&exclude=hourly,daily,minutely&appid=51a61d96cb3c110846e5130afe5ac605';
+var current = document.getElementsByClassName("city");
 const cityName = document.getElementById('cityName');
+var city = document.getElementsByClassName('city');
 
-fetch(apiUrl)
-.then(function (response) {
-    return response.json();
-})
-.then(function (data) {
-    appendData(data); 
 
-    })
-    function appendData(data) {
-        var city = document.getElementsByClassName('city');
-        city.innerHTML = "City: " + data
-    }
+var searchBtn = document.getElementById("searchBtn");
+
+
+function appendData(data) {
+    
+    city.innerHTML = "City: " + data;
+    console.log(cityInput.value);
+    cityName.innerHTML = cityInput.value;
+}
 
 function getInfo() {
-    
-    searchBtn.addEventListener('click', function() {
-        cityName.innerHTML = cityInput.value;
-    }); 
 
-// fetch("https://api.openweathermap.org/data/2.5/forecast?q='+cityInput.value+'&appid=2ff41d70607b09fa349823714cb91710")
+    fetch(apiUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            appendData(data);
+    
+        })  
+}
+
+current.innerHTML = 'City: ' + fetch(todayApiUrl)
+    .then(function (response) {
+        return response.json();
+    }) 
+    .then(function (data) {
+        appendData(data); 
+ })
+
+
+searchBtn.addEventListener('click', getInfo);
+    
+
+
+
 
 
 //     for( i=0; i<5; i++ ){
@@ -43,8 +57,16 @@ function getInfo() {
 //         document.getElementsByClassName("img" + (i + 1)).src="http://openweathermap.org/img/wn/" + data.list[i].weather[0].icon+".png";
 //     }
 // console.log(getInfo());
-// .catch(err => alert("Something Went Wrong"))
-}
+// .catch (err => alert("Something Went Wrong"))
+// }
+
+
+let date = new Date();
+const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+let day = date.getDate();
+let month = date.getMonth()  + 1;
+let year = date.getFullYear();
+
 // check day so you get today and the next 4 days
 function CheckDay(day) {
     if(day + date.getDay() > 6){
