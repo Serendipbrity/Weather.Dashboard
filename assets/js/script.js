@@ -3,26 +3,39 @@
 var todayApiUrl =
   "https://api.openweathermap.org/data/2.5/onecall?lat=37.4516&lon=-77.6592&units=imperial&exclude=hourly,daily,minutely&appid=51a61d96cb3c110846e5130afe5ac605";
 // where the city name show up under the search button
-const cityName = document.getElementById("cityName");
+let cityName = document.querySelector(".cityName");
 
 // the search button
 var searchBtn = document.getElementById("searchBtn");
 // the entire form for search input container
 var search = document.querySelector('.search');
 
+let searchHistory = []
+ // create button
+ var el = document.createElement('button');
+   // add button to cityName
 
+   
 function getInfo(e) {
     e.preventDefault();
     // where the user inputs the city
     var cityInput = document.querySelector(".cityInput");
     // the users input
-    var city = cityInput.value
+  var city = cityInput.value
   var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=2ff41d70607b09fa349823714cb91710`;
-  // store city input value (city)
-  localStorage.setItem("city",JSON.stringify(city));
-  var stored = JSON.parse(localStorage.getItem("city"));
-  cityName.append(stored);
-
+  //set array in local storage with key of "city"
+  localStorage.setItem("city", JSON.stringify(searchHistory));
+  // add new city to end of search history array
+  searchHistory.push(city);
+  console.log(searchHistory);
+    for (let i = 0; i < searchHistory.length; i++) {
+      // add button to cityName section on left
+      cityName.appendChild(el);
+     
+      el.append(searchHistory[i]);
+      
+    }
+    var stored = JSON.parse(localStorage.getItem("city"));
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
@@ -36,7 +49,7 @@ function getInfo(e) {
       // uv index
       // var uvIndex = (data.)
       var icon = (data.weather[0].icon);
-      cityName.innerHTML = city;
+    
       // where todays city/weather shows up in the large box
       var cityBox = document.querySelector(".city");
       // have city show up in citybox
@@ -45,7 +58,7 @@ function getInfo(e) {
     
 }
 
-    
+
 
 
 search.addEventListener("submit", getInfo);
