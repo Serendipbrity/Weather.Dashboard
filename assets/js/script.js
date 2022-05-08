@@ -7,18 +7,18 @@ let cityName = document.querySelector(".cityName");
 
 // the search button
 var searchBtn = document.getElementById("searchBtn");
+
+
 // the entire form for search input container
 var search = document.querySelector('.search');
 
 let searchHistory = []
 
-   // add button to cityName
-
    
 function getInfo(e) {
     e.preventDefault();
     // where the user inputs the city
-    var cityInput = document.querySelector(".cityInput");
+  var cityInput = document.querySelector(".cityInput");
     // the users input
   var city = cityInput.value
   var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=2ff41d70607b09fa349823714cb91710`;
@@ -27,14 +27,24 @@ function getInfo(e) {
   // add new city to end of search history array
   searchHistory.push(city);
   console.log(searchHistory);
+
+  // create new button for city inputs
   var el = document.createElement('button');
+  // add class to buttons
+  el.classList.add('cityBtn');
     for (let i = 0; i < searchHistory.length; i++) {
       // add button to cityName section on left
       cityName.appendChild(el);
-      // create button
-
+      // add search history (new city name) to button
       el.append(searchHistory[i]);
-      
+      // remove last city from array so that it doesn't appear on next button
+      searchHistory.pop(searchHistory);
+
+      let cityBtn = document.querySelector('.cityBtn');
+      let historyCity = cityBtn.innerHTML;
+      // console.log(historyCity);
+      // var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${historyCity}&appid=2ff41d70607b09fa349823714cb91710`;
+// cityBtn.addEventListener('submit', newCityValue);
     }
     var stored = JSON.parse(localStorage.getItem("city"));
   fetch(apiUrl)
@@ -61,8 +71,8 @@ function getInfo(e) {
 
 
 
-
 search.addEventListener("submit", getInfo);
+
 
 // console.log(getInfo());
 // .catch (err => alert("Something Went Wrong"))
@@ -100,10 +110,26 @@ function CheckDay(day) {
 function boxInfo() {
     // add days of week and date to boxes
   for (let i = 0; i < 5; i++) { 
-      // the issue with every other box showing is on this line. Probably in (i + 1).----- weekday[CheckDay(i++)] add correct date
-        document.getElementById("day" + (1+i)).innerHTML = weekday[CheckDay(i++)] + '</br>' +
-            (boxDay = '(' + (date.getMonth() + 1) + ' / ' + (date.getDate() + i++) + ' / ' + date.getFullYear() + ')') + '</br>' +
-            'Temp: ' + '</br>' + `Wind Speed: ` + '</br>' + 'Humidity: ' + '</br>' + "UV Index: ";
+    // day + (i + 1) shows all boxes.----- weekday[CheckDay(i+1)] add correct day of week
+      document.getElementById("day" + (1)).innerHTML = weekday[CheckDay(i)] + '</br>' +
+          (boxDay = '(' + (date.getMonth() + 1) + ' / ' + (date.getDate() + i++ ) + ' / ' + date.getFullYear() + ')') + '</br>' +
+        'Temp: ' + '</br>' + `Wind Speed: ` + '</br>' + 'Humidity: ' + '</br>' + "UV Index: ";
+     // day + (i + 1) shows all boxes.----- weekday[CheckDay(i+1)] add correct day of week
+     document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)] + '</br>' +
+     (boxDay = '(' + (date.getMonth() + 1) + ' / ' + (date.getDate() + i++ ) + ' / ' + date.getFullYear() + ')') + '</br>' +
+       'Temp: ' + '</br>' + `Wind Speed: ` + '</br>' + 'Humidity: ' + '</br>' + "UV Index: ";
+     // day + (i + 1) shows all boxes.----- weekday[CheckDay(i+1)] add correct day of week
+     document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)] + '</br>' +
+     (boxDay = '(' + (date.getMonth() + 1) + ' / ' + (date.getDate() + i++ ) + ' / ' + date.getFullYear() + ')') + '</br>' +
+       'Temp: ' + '</br>' + `Wind Speed: ` + '</br>' + 'Humidity: ' + '</br>' + "UV Index: ";
+     // day + (i + 1) shows all boxes.----- weekday[CheckDay(i+1)] add correct day of week
+     document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)] + '</br>' +
+     (boxDay = '(' + (date.getMonth() + 1) + ' / ' + (date.getDate() + i++ ) + ' / ' + date.getFullYear() + ')') + '</br>' +
+       'Temp: ' + '</br>' + `Wind Speed: ` + '</br>' + 'Humidity: ' + '</br>' + "UV Index: ";
+     // day + (i + 1) shows all boxes.----- weekday[CheckDay(i+1)] add correct day of week
+     document.getElementById("day" + (i+1)).innerHTML = weekday[CheckDay(i)] + '</br>' +
+     (boxDay = '(' + (date.getMonth() + 1) + ' / ' + (date.getDate() + i++ ) + ' / ' + date.getFullYear() + ')') + '</br>' +
+     'Temp: ' + '</br>' + `Wind Speed: ` + '</br>' + 'Humidity: ' + '</br>' + "UV Index: ";
     }
 
 }
