@@ -11,8 +11,7 @@ var searchBtn = document.getElementById("searchBtn");
 var search = document.querySelector('.search');
 
 let searchHistory = []
- // create button
- var el = document.createElement('button');
+
    // add button to cityName
 
    
@@ -28,10 +27,12 @@ function getInfo(e) {
   // add new city to end of search history array
   searchHistory.push(city);
   console.log(searchHistory);
+  var el = document.createElement('button');
     for (let i = 0; i < searchHistory.length; i++) {
       // add button to cityName section on left
       cityName.appendChild(el);
-     
+      // create button
+
       el.append(searchHistory[i]);
       
     }
