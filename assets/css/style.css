@@ -8,10 +8,36 @@
     height: 250px;
     padding: 5px;
     margin: 15px;
+    font-size: 25px;
+    border-radius: 5px;
 }
+
 
 .days {
     margin: auto;
     padding-bottom: 45px;
     border: solid 2px;
+    border-radius: 5px;
+}
+
+#day {
+    font-weight: bolder;
+}
+
+input {
+    padding: 10px;
+}
+
+button {
+    width: 100%;
+    margin: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: lightblue;
+    font-size: 20px;
+}
+
+#searchCityText {
+   font-size: 25px;
+    margin-top: 15px;
 }
